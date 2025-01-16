@@ -1,11 +1,11 @@
 package com.springcli.explorer;
 
+import com.springcli.model.Project;
 import java.io.File;
 import java.util.Objects;
 
 public class JavaProjectValidator {
     private static JavaProjectValidator instance;
-    private final String path;
 
     public static JavaProjectValidator getInstance() {
         if (Objects.isNull(instance)) {
@@ -15,28 +15,28 @@ public class JavaProjectValidator {
     }
 
     private JavaProjectValidator() {
-        path = System.getProperty("user.dir");
-    }
 
+    }
 
     public void verifyProject() throws Exception {
-        verifyPomXml();
+        PomXmlExplorer.getInstance().verifyPomXml();
         verifySrcDir();
-    }
-
-    public void verifyPomXml() throws Exception {
-        String pomXml = path + File.separator  + "pom.xml";
-        File pomXmlFile = new File(pomXml);
-        if(!(pomXmlFile.exists() && !pomXmlFile.isDirectory())) {
-            throw new Exception("pom.xml file does not exists.");
-        }
+        verifyPackageDir();
     }
 
     private void verifySrcDir() throws Exception {
-        String srcDirPath = path + File.separator + "src";
+        String srcDirPath = Project.getInstance().getSrcPath();
         File srcDirFile = new File(srcDirPath);
         if(!(srcDirFile.exists() && srcDirFile.isDirectory())) {
             throw new Exception("src directory does not exists.");
+        }
+    }
+
+    private void verifyPackageDir() throws Exception {
+        String PackageDirPath = Project.getInstance().getPackagePath();
+        File srcDirFile = new File(PackageDirPath);
+        if(!(srcDirFile.exists() && srcDirFile.isDirectory())) {
+            throw new Exception("package directory does not exists.");
         }
     }
 }
