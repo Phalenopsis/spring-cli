@@ -11,9 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="84e72c55-efe6-40d7-ab4d-6f90350be633" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/springCLI_jar/springCLI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/springCLI_jar/springCLI.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/springcli/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springcli/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/springcli/explorer/JavaProjectValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springcli/explorer/JavaProjectValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

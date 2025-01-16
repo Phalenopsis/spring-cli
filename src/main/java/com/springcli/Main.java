@@ -4,10 +4,8 @@ import com.springcli.console.ReadConsole;
 import com.springcli.explorer.JavaProjectValidator;
 import com.springcli.model.Project;
 
-import java.io.*;
-
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         try {
             JavaProjectValidator.getInstance().verifyProject();
         } catch (Exception e) {
@@ -20,6 +18,5 @@ public class Main {
         readConsole.explain();
         boolean entityArchitecture = readConsole.askArchitecture();
         Project.getInstance().setEntityArchitecture(entityArchitecture);
-
     }
 }
