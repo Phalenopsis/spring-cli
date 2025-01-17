@@ -1,5 +1,7 @@
 package com.springcli.console;
 
+import com.springcli.model.Project;
+
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
@@ -31,19 +33,7 @@ public class ReadConsole {
                 "In this package the entity class, a controller and a repository will then be created.\n";
         String controllerArch = "In the controller architecture, all entities will in a model package, " +
                 "all controllers in a controller package and all repository in a repository package.";
-        String schemaArch =
-                "                 " + bold("Entity Architecture") +
-                "            #          " + bold("Controller Architecture") + "\n" +
-                "main                                            #   main\n" +
-                " |                                              #    |\n" +
-                " |---domain                                     #    |---model\n" +
-                " |      |---entity1                             #    |    |---Entity1.java\n" +
-                " |      |      |---Entity1.java                 #    |---controller\n" +
-                " |      |      |---Entity1Controller.java       #    |    |---Entity1Controller.java\n" +
-                " |      |      |---Entity1Repository.java       #    |---repository\n" +
-                " |      |      |---Entity1DTO.java              #    |    |---Entity1Repository.java\n" +
-                " |      |---entity2                             #    |---dto\n" +
-                " |      |      |---Entity2.java                 #    |    |---Entity1DTO.java\n";
+        String schemaArch = getSchemaArch();
         String question = "So, do you prefer entity architecture ? (Y/n)";
         System.out.println(entityArch);
         System.out.println(controllerArch);
@@ -57,6 +47,25 @@ public class ReadConsole {
         return !response.equals("n");
     }
 
+    private String getSchemaArch() {
+        String schemaArchStart =
+                "                 " + bold("Entity Architecture") +
+                "            #          " + bold("Controller Architecture") + "\n";
+        String schemaArchMiddle = getSchemaArchMiddle();
+        String schemaArchEnd =
+                """
+                         |                                              #    |
+                         |---domain                                     #    |---model
+                         |      |---entity1                             #    |    |---Entity1.java
+                         |      |      |---Entity1.java                 #    |---controller
+                         |      |      |---Entity1Controller.java       #    |    |---Entity1Controller.java
+                         |      |      |---Entity1Repository.java       #    |---repository
+                         |      |      |---Entity1DTO.java              #    |    |---Entity1Repository.java
+                         |      |---entity2                             #    |---dto
+                         |      |      |---Entity2.java                 #    |    |---Entity1DTO.java
+                        """;
+        return schemaArchStart + schemaArchMiddle + schemaArchEnd;
+    }
 
     private String bold(String term) {
         return reset(ConstantsConsoleColor.ANSI_BOLD + term);
@@ -68,6 +77,19 @@ public class ReadConsole {
 
     private String reset(String term) {
         return term + ConstantsConsoleColor.ANSI_RESET;
+    }
+
+    private String getSchemaArchMiddle() {
+        String base = "main                                            #   main\n";
+        String projectName = Project.getInstance().getPackageName();
+        int differenceBetweenMainAndNAme = projectName.length() - "main".length();
+        String main = "main";
+        for(int i = 0; i < differenceBetweenMainAndNAme; i += 1) {
+            main = main + " ";
+        }
+        base = base.replace(main, projectName);
+        base = base.replace("main", projectName);
+        return base;
     }
 
 }

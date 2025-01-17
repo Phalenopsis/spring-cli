@@ -1,5 +1,6 @@
 package com.springcli;
 
+import com.springcli.console.EntityConsole;
 import com.springcli.console.ReadConsole;
 import com.springcli.explorer.JavaProjectValidator;
 import com.springcli.model.Project;
@@ -18,5 +19,7 @@ public class Main {
         readConsole.explain();
         boolean entityArchitecture = readConsole.askArchitecture();
         Project.getInstance().setEntityArchitecture(entityArchitecture);
+
+        EntityConsole.getInstance().askForEntity();
     }
 }

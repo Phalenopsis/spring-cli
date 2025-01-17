@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Project {
     private final PackageName packageName;
     private final String userPath;
+    private final String packagePath;
 
     private boolean entityArchitecture = true;
 
@@ -23,6 +24,8 @@ public class Project {
     private Project(String pPackageName) {
         packageName = new PackageName(pPackageName);
         userPath = System.getProperty("user.dir") + File.separator;
+        packagePath = getSrcPath() + File.separator + "main" +
+                File.separator + "java" + File.separator + packageName.getPath();
     }
 
     public String getPackageName() {
@@ -34,7 +37,7 @@ public class Project {
     }
 
     public String getPackagePath() {
-        return getSrcPath() + File.separator + "main" + File.separator + "java" + File.separator + packageName.getPath();
+        return packagePath;
     }
 
     public String getUserPath() {
@@ -47,5 +50,14 @@ public class Project {
 
     public void setEntityArchitecture(boolean entityArchitecture) {
         this.entityArchitecture = entityArchitecture;
+    }
+
+    public String getEntityPath(String entity) {
+        return entityArchitecture ? getEntityPathInEntityArch(entity) :
+                packagePath + File.separator + "model";
+    }
+
+    private String getEntityPathInEntityArch(String entity) {
+        return packagePath + File.separator + "domain" + File.separator + entity;
     }
 }
